@@ -1,0 +1,5 @@
+SELECT users.name, comments.text FROM users
+LEFT JOIN
+(SELECT comments.user_id , MAX(comments.id) as last_cid FROM comments GROUP BY comments.user_id) uc
+on users.id = uc.user_id
+LEFT JOIN comments on comments.id = uc.last_cid
